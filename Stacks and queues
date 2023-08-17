@@ -1,0 +1,47 @@
+#CELEBRITY PROBLEM...............
+Stack<Integer> r=new Stack<Integer>();
+        // Stack<Integer> c=new Stack<Integer>();
+        // for(int i=0;i<n;i++){
+        //     for(int j=0;j<n;j++){
+        //         if(i==j){
+        //             continue;
+        //         }
+        //         r.push(M[i][j]);
+        //         c.push(M[j][i]);
+        //     }
+        //     if(c.contains(0) || r.contains(1)){
+        //         r.clear();
+        //         c.clear();
+        //         continue;
+        //     }else{
+        //         return i;
+        //     }
+        // }
+        // return -1;
+time:O(N^2)
+        --------------------------------------optimized approach
+        Stack<Integer> r=new Stack<Integer>();
+        for(int i=0;i<n;i++){
+            r.push(i);
+        }
+        while(r.size()>1){
+            int a=r.pop();
+            int b=r.pop();
+            if(M[a][b]==1){
+                r.push(b);
+            }else if(M[b][a]==1){
+                r.push(a);
+            }
+        }
+        if(r.isEmpty()){
+            return -1;
+        }
+        int res=r.pop();
+        for(int i=0;i<n;i++){
+            if(i!=res && (M[i][res]==0 || M[res][i]==1)){
+                return -1;
+            }
+        }
+        return res;
+time: O(N)
+___________________________________________________
